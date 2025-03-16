@@ -125,3 +125,141 @@ A data warehouse is a centralized repository for structured and semi-structured 
 | **Software Engineer** | Builds scalable software solutions, APIs, and backend systems | Azure DevOps, Azure Kubernetes Service, Azure Logic Apps |
 
 ---
+
+
+## 📌 Table
+A **Table** is a structured collection of related data stored in a database. It consists of rows (records) and columns (fields), where each column has a specific data type.
+
+### 🛠 Query:
+```sql
+CREATE TABLE Employees (  
+    EmployeeID INT PRIMARY KEY,  
+    Name VARCHAR(100),  
+    Age INT,  
+    Department VARCHAR(50)  
+);
+```
+
+---
+
+## 📌 View
+A **View** is a virtual table that stores the result of a SQL query. It does not store actual data but provides a way to simplify complex queries.
+
+### 🛠 Query:
+```sql
+CREATE VIEW EmployeeView AS  
+SELECT Name, Department FROM Employees  
+WHERE Age > 30;  
+```
+---
+
+## 📌 Schema
+A **Schema** is a logical container within a database that groups related objects like tables, views, and stored procedures.
+
+### 🛠 Query:
+```sql
+CREATE SCHEMA Sales;  
+CREATE TABLE Sales.Orders (  
+    OrderID INT PRIMARY KEY,  
+    Amount DECIMAL(10,2)  
+);  
+```
+---
+
+## 📌 Normalization
+Normalization is the process of organizing data in a database to reduce redundancy and improve integrity.
+
+### 🔹 Forms of Normalization:
+1️⃣ **1NF (First Normal Form)** – Ensures atomicity by eliminating duplicate columns.  
+2️⃣ **2NF (Second Normal Form)** – Removes partial dependencies by ensuring all attributes depend on the primary key.  
+3️⃣ **3NF (Third Normal Form)** – Eliminates transitive dependencies.  
+
+### 🛠 Query:
+#### **Customers Table**
+```sql
+CREATE TABLE Customers (  
+    CustomerID INT PRIMARY KEY,  
+    Name VARCHAR(100),  
+    Address VARCHAR(255)  
+);  
+```
+#### **Orders Table**
+```sql
+CREATE TABLE Orders (  
+    OrderID INT PRIMARY KEY,  
+    CustomerID INT,  
+    FOREIGN KEY (CustomerID) REFERENCES Customers(CustomerID)  
+);  
+```
+---
+
+## 📌 SQL (Structured Query Language)
+SQL is a language used to query and manipulate relational databases.
+
+### 🛠 Query:
+```sql
+SELECT * FROM Employees WHERE Age > 25;  
+```
+---
+
+## 📌 DDL (Data Definition Language)
+DDL commands are used to define and modify the structure of database objects.
+
+### 🛠 Query:
+```sql
+CREATE TABLE Customers (  
+    ID INT PRIMARY KEY,  
+    Name VARCHAR(100)  
+);  
+
+ALTER TABLE Customers ADD Email VARCHAR(255);  
+
+DROP TABLE Customers;  
+```
+---
+
+## 📌 DML (Data Manipulation Language)
+DML commands are used to insert, update, delete, and retrieve data from tables.
+
+### 🛠 Query:
+```sql
+INSERT INTO Employees (EmployeeID, Name, Age, Department)  
+VALUES (1, 'John', 30, 'HR');  
+
+UPDATE Employees SET Age = 35 WHERE EmployeeID = 1;  
+
+DELETE FROM Employees WHERE EmployeeID = 1;  
+```
+---
+
+## 📌 DCL (Data Control Language)
+DCL is used to manage user access to database objects.
+
+### 🛠 Query:
+```sql
+GRANT SELECT, INSERT ON Employees TO User1;  
+
+REVOKE INSERT ON Employees FROM User1;  
+```
+---
+
+## 📌 Stored Procedure
+A **Stored Procedure** is a precompiled set of SQL statements.
+
+### 🛠 Query:
+```sql
+CREATE PROCEDURE GetEmployee  
+AS  
+SELECT * FROM Employees;  
+
+EXEC GetEmployee;  
+```
+---
+
+## 📌 Index
+An **Index** improves the speed of queries by allowing faster data retrieval.
+
+### 🛠 Query:
+```sql
+CREATE INDEX idx_employee_name ON Employees (Name);
+```
