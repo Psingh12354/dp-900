@@ -376,3 +376,89 @@ Ensuring databases are highly available and resilient against failures.
 | **High Availability** | Ensuring uptime & resilience | Failover Groups, Zone Redundancy |
 
 ---
+
+
+## 🔹 1. Managing an Azure Account
+Azure account management involves handling subscriptions, resource groups, and access control.
+
+### 🔹 **Key Components:**
+- **Azure Subscription:** Required to access Azure services.
+- **Resource Groups:** Logical containers for organizing resources.
+- **Role-Based Access Control (RBAC):** Provides permissions based on roles.
+- **Azure Portal, CLI, and PowerShell:** Used for managing accounts and resources.
+
+### **Example:** Creating a Resource Group using Azure CLI
+```sh
+az group create --name MyResourceGroup --location eastus
+```
+📌 **Reference:** [Create a Resource Group](https://learn.microsoft.com/en-us/azure/azure-resource-manager/management/manage-resource-groups-portal)
+
+---
+
+## 🔹 2. Azure Blob Storage
+Blob Storage is used for storing unstructured data like images, videos, and backups.
+
+### 🔹 **Key Features:**
+- Stores large amounts of unstructured data.
+- Supports Hot, Cool, and Archive tiers.
+- Provides public and private access levels.
+
+### **Example:** Upload a file to Blob Storage using Azure CLI
+```sh
+az storage blob upload --account-name mystorageaccount --container-name mycontainer --name myfile.txt --file myfile.txt
+```
+📌 **Reference:** [Azure Blob Storage Overview](https://learn.microsoft.com/en-us/azure/storage/blobs/storage-blobs-introduction)
+
+### **Steps to Create a Blob Storage:**
+1. Navigate to **Azure Portal** → **Storage Accounts** → **Create Storage Account**
+2. Choose **Performance**, **Replication**, and **Access tier**
+3. Click **Review + Create**
+
+📌 **Reference:** [Create Azure Blob Storage](https://learn.microsoft.com/en-us/azure/storage/blobs/storage-quickstart-blobs-portal)
+
+---
+
+## 🔹 3. Azure File Storage
+Azure File Storage provides fully managed file shares accessible via SMB and NFS protocols.
+
+### 🔹 **Key Features:**
+- Supports SMB and NFS for file sharing.
+- Can be mounted on Windows, Linux, and macOS.
+- Offers snapshots for backup and recovery.
+
+### **Example:** Mounting Azure File Share on Windows
+```sh
+net use Z: \\storageaccount.file.core.windows.net\fileshare /user:storageaccount storagekey
+```
+📌 **Reference:** [Azure File Storage Overview](https://learn.microsoft.com/en-us/azure/storage/files/storage-files-introduction)
+
+### **Steps to Set Up Azure File Storage:**
+1. Go to **Azure Portal** → **Storage Accounts** → **File Shares**
+2. Click **+ File Share** → Provide a name and quota
+3. Click **Create** and mount it using SMB/NFS
+
+📌 **Reference:** [Create an Azure File Share](https://learn.microsoft.com/en-us/azure/storage/files/storage-how-to-create-file-share)
+
+---
+
+## 🔹 4. Azure Table Storage
+Azure Table Storage is a NoSQL key-value store designed for semi-structured data.
+
+### 🔹 **Key Features:**
+- Provides fast and scalable key-value storage.
+- Supports OData queries.
+- Low-cost storage option for structured data.
+
+### **Example:** Insert data into Azure Table Storage using PowerShell
+```powershell
+Add-AzTableRow -TableName "MyTable" -PartitionKey "Partition1" -RowKey "001" -Property @{ Name="John Doe"; Age=30 }
+```
+📌 **Reference:** [Azure Table Storage Overview](https://learn.microsoft.com/en-us/azure/storage/tables/table-storage-overview)
+
+### **Steps to Create a Table Storage:**
+1. Navigate to **Azure Portal** → **Storage Accounts** → **Tables**
+2. Click **+ Table** → Provide a name
+3. Start adding entities using **Azure Table Explorer**
+
+📌 **Reference:** [Create Azure Table Storage](https://learn.microsoft.com/en-us/azure/storage/tables/table-storage-design-guide)
+
