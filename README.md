@@ -187,33 +187,227 @@ CREATE TABLE Sales.Orders (
     Amount DECIMAL(10,2)  
 );  
 ```
+# 📌 Normalization in Databases
+
+Normalization is the process of organizing data in a database to **eliminate redundancy** and **ensure data integrity** by breaking large tables into smaller ones while maintaining relationships.
+
+## 🔹 Why is Normalization Important?
+- ✅ Reduces **data redundancy** (no duplicate data).
+- ✅ Improves **data consistency and integrity**.
+- ✅ Makes queries **more efficient**.
+- ✅ Prevents **data anomalies** (insertion, update, deletion errors).
+
+---
 ---
 
-## 📌 Normalization
-Normalization is the process of organizing data in a database to reduce redundancy and improve integrity.
+## 🔹 Forms of Normalization
 
-### 🔹 Forms of Normalization:
-1️⃣ **1NF (First Normal Form)** – Ensures atomicity by eliminating duplicate columns.  
-2️⃣ **2NF (Second Normal Form)** – Removes partial dependencies by ensuring all attributes depend on the primary key.  
-3️⃣ **3NF (Third Normal Form)** – Eliminates transitive dependencies.  
+### 1️⃣ First Normal Form (1NF) - Ensure Atomicity
+🔹 **Rule:** Each column should contain atomic (indivisible) values, and there should be no duplicate columns.
 
-### 🛠 Query:
-#### **Customers Table**
+#### ❌ Bad Example (Not in 1NF)
 ```sql
-CREATE TABLE Customers (  
-    CustomerID INT PRIMARY KEY,  
-    Name VARCHAR(100),  
-    Address VARCHAR(255)  
-);  
+CREATE TABLE Customers (
+    CustomerID INT PRIMARY KEY,
+    Name VARCHAR(100),
+    PhoneNumbers VARCHAR(255) -- ❌ Multiple phone numbers in one field
+);
 ```
-#### **Orders Table**
+#### 🚨 Problem:
+- Storing multiple phone numbers in a single column breaks atomicity.
+
+#### ✅ Fix (Convert to 1NF)
 ```sql
-CREATE TABLE Orders (  
-    OrderID INT PRIMARY KEY,  
-    CustomerID INT,  
-    FOREIGN KEY (CustomerID) REFERENCES Customers(CustomerID)  
-);  
+CREATE TABLE Customers (
+    CustomerID INT PRIMARY KEY,
+    Name VARCHAR(100)
+);
+
+CREATE TABLE CustomerPhones (
+    CustomerID INT,
+    PhoneNumber VARCHAR(15),
+    PRIMARY KEY (CustomerID, PhoneNumber),
+    FOREIGN KEY (CustomerID) REFERENCES Customers(CustomerID)
+);
 ```
+---
+
+### 2️⃣ Second Normal Form (2NF) - Remove Partial Dependencies
+🔹 **Rule:** Every **non-key** column should depend on the **entire primary key**, not just part of it.
+
+#### ❌ Bad Example (Not in 2NF)
+```sql
+CREATE TABLE Orders (
+    OrderID INT PRIMARY KEY,
+    CustomerID INT,
+    CustomerName VARCHAR(100), -- ❌ Depends only on CustomerID, not OrderID
+    OrderDate DATE
+);
+```
+
+#### 🚨 Problem:
+- `CustomerName` depends **only** on `CustomerID`, not on `OrderID`.
+
+#### ✅ Fix (Convert to 2NF - Separate Customers Table)
+```sql
+CREATE TABLE Customers (
+    CustomerID INT PRIMARY KEY,
+    Name VARCHAR(100)
+);
+
+CREATE TABLE Orders (
+    OrderID INT PRIMARY KEY,
+    CustomerID INT,
+    OrderDate DATE,
+    FOREIGN KEY (CustomerID) REFERENCES Customers(CustomerID)
+);
+```
+---
+
+### 3️⃣ Third Normal Form (3NF) - Remove Transitive Dependencies
+🔹 **Rule:** **Non-key** attributes should depend **only** on the **primary key** (not other non-key columns).
+
+#### ❌ Bad Example (Not in 3NF)
+```sql
+CREATE TABLE Employees (
+    EmployeeID INT PRIMARY KEY,
+    Name VARCHAR(100),
+    DepartmentID INT,
+    DepartmentName VARCHAR(100) -- ❌ Depends on DepartmentID, not EmployeeID
+);
+```
+#### 🚨 Problem:
+- `DepartmentName` **depends on `DepartmentID`**, not `EmployeeID`.
+
+#### ✅ Fix (Convert to 3NF - Separate Departments Table)
+```sql
+CREATE TABLE Departments (
+    DepartmentID INT PRIMARY KEY,
+    DepartmentName VARCHAR(100)
+);
+
+CREATE TABLE Employees (
+    EmployeeID INT PRIMARY KEY,
+    Name VARCHAR(100),
+    DepartmentID INT,
+    FOREIGN KEY (DepartmentID) REFERENCES Departments(DepartmentID)
+);
+```
+---
+
+### 4️⃣ Boyce-Codd Normal Form (BCNF) - Strengthened 3NF
+🔹 **Rule:** Every determinant (column that determines another column) must be a **candidate key**.
+
+#### ❌ Bad Example (Not in BCNF)
+```sql
+CREATE TABLE StudentCourses (
+    StudentID INT,
+    CourseID INT,
+    Instructor VARCHAR(100), -- ❌ Instructor depends on CourseID, not StudentID
+    PRIMARY KEY (StudentID, CourseID)
+);
+```
+#### 🚨 Problem:
+- `Instructor` is determined by `CourseID`, not by `(StudentID, CourseID)`.
+
+#### ✅ Fix (Convert to BCNF - Separate Instructors Table)
+```sql
+CREATE TABLE Courses (
+    CourseID INT PRIMARY KEY,
+    Instructor VARCHAR(100)
+);
+
+CREATE TABLE StudentCourses (
+    StudentID INT,
+    CourseID INT,
+    PRIMARY KEY (StudentID, CourseID),
+    FOREIGN KEY (CourseID) REFERENCES Courses(CourseID)
+);
+```
+---
+
+### 5️⃣ Fourth Normal Form (4NF) - Remove Multivalued Dependencies
+🔹 **Rule:** A table should not contain **two or more independent multi-valued** attributes.
+
+#### ❌ Bad Example (Not in 4NF)
+```sql
+CREATE TABLE StudentActivities (
+    StudentID INT,
+    Hobby VARCHAR(100), -- ❌ Multi-valued
+    Skill VARCHAR(100)  -- ❌ Multi-valued
+);
+```
+#### 🚨 Problem:
+- A student may have multiple hobbies **and** multiple skills, leading to redundancy.
+
+#### ✅ Fix (Convert to 4NF - Create Separate Tables)
+```sql
+CREATE TABLE Hobbies (
+    StudentID INT,
+    Hobby VARCHAR(100),
+    PRIMARY KEY (StudentID, Hobby)
+);
+
+CREATE TABLE Skills (
+    StudentID INT,
+    Skill VARCHAR(100),
+    PRIMARY KEY (StudentID, Skill)
+);
+```
+---
+
+### 6️⃣ Fifth Normal Form (5NF) - Remove Join Dependencies
+🔹 **Rule:** A table should not have **unnecessary joins** that can be broken down into smaller tables.
+
+#### ❌ Bad Example (Not in 5NF)
+```sql
+CREATE TABLE Sales (
+    SalespersonID INT,
+    ProductID INT,
+    CustomerID INT,
+    PRIMARY KEY (SalespersonID, ProductID, CustomerID)
+);
+```
+#### 🚨 Problem:
+- A salesperson may sell **many products** to **many customers**, creating complex dependencies.
+
+#### ✅ Fix (Convert to 5NF - Break into Multiple Tables)
+```sql
+CREATE TABLE Salespersons (
+    SalespersonID INT PRIMARY KEY
+);
+
+CREATE TABLE Products (
+    ProductID INT PRIMARY KEY
+);
+
+CREATE TABLE Customers (
+    CustomerID INT PRIMARY KEY
+);
+
+CREATE TABLE SalesDetails (
+    SalespersonID INT,
+    ProductID INT,
+    CustomerID INT,
+    PRIMARY KEY (SalespersonID, ProductID, CustomerID),
+    FOREIGN KEY (SalespersonID) REFERENCES Salespersons(SalespersonID),
+    FOREIGN KEY (ProductID) REFERENCES Products(ProductID),
+    FOREIGN KEY (CustomerID) REFERENCES Customers(CustomerID)
+);
+```
+---
+
+## 🎯 Summary of Normalization Forms
+| Normal Form | Rule |
+|-------------|-------------------------------------------------------------|
+| **1NF** | Ensure atomicity (no multiple values in a single column). |
+| **2NF** | No partial dependencies (every non-key column depends on the full primary key). |
+| **3NF** | No transitive dependencies (every non-key column depends only on the primary key). |
+| **BCNF** | Every determinant must be a candidate key. |
+| **4NF** | No multi-valued dependencies. |
+| **5NF** | No unnecessary joins. |
+
+---
 ---
 
 ## 📌 SQL (Structured Query Language)
@@ -461,4 +655,131 @@ Add-AzTableRow -TableName "MyTable" -PartitionKey "Partition1" -RowKey "001" -Pr
 3. Start adding entities using **Azure Table Explorer**
 
 📌 **Reference:** [Create Azure Table Storage](https://learn.microsoft.com/en-us/azure/storage/tables/table-storage-design-guide)
+
+---
+
+## 🔹 What are Non-Relational Databases?
+A **Non-Relational Database** (also called **NoSQL Database**) is a type of database that does not store data in a traditional **table-based relational structure**. Instead, it uses **flexible schema models** for high **scalability** and **performance**.
+
+### ✅ **Key Benefits**
+- **Schema Flexibility** – No fixed structure, ideal for dynamic data.  
+- **High Scalability** – Supports horizontal scaling (adding more servers).  
+- **Fast Read & Write** – Optimized for high-speed transactions.  
+- **Unstructured & Semi-Structured Data Support** – Stores JSON, XML, key-value, graphs, etc.  
+
+---
+
+## 🔹 Non-Relational Data Types
+Unlike relational databases (SQL) that store structured tabular data, non-relational databases store **unstructured** and **semi-structured** data.
+
+| Data Type | Description | Examples |
+|-----------|------------|----------|
+| **Key-Value** | Simple key-value pairs for ultra-fast lookups | Redis, DynamoDB |
+| **Document** | Stores JSON, XML, or BSON documents | MongoDB, CouchDB |
+| **Column-Family** | Optimized for large-scale analytics with column-based storage | Apache Cassandra, HBase |
+| **Graph** | Stores complex relationships between data entities | Neo4j, Azure Cosmos DB (Graph API) |
+
+---
+
+## 🔹 NoSQL Database Models  
+NoSQL databases are categorized into **four main types**, each designed for specific use cases.
+
+### 1️⃣ **Key-Value Databases**
+- 🔹 **Data Structure:** Simple key-value pairs.
+- 🔹 **Best for:** Caching, real-time analytics, session management.
+- 🔹 **Examples:** Redis, Amazon DynamoDB, Riak.
+
+#### ✅ **Example Key-Value Storage in Redis**
+[SQL]
+SET user:1 "John Doe"
+GET user:1
+
+---
+
+### 2️⃣ **Document Databases**
+- 🔹 **Data Structure:** JSON, BSON, or XML documents.
+- 🔹 **Best for:** Flexible data storage, content management, catalogs.
+- 🔹 **Examples:** MongoDB, CouchDB, Firebase Firestore.
+
+#### ✅ **Example Document Storage in MongoDB**
+[SQL]
+db.users.insertOne({
+    "_id": 1,
+    "name": "Alice",
+    "email": "alice@example.com",
+    "orders": [1001, 1002, 1003]
+})
+
+---
+
+### 3️⃣ **Column-Family Databases**
+- 🔹 **Data Structure:** Stores data in columns instead of rows.
+- 🔹 **Best for:** Large-scale analytics, data warehousing, real-time big data.
+- 🔹 **Examples:** Apache Cassandra, Google Bigtable, HBase.
+
+#### ✅ **Example Column-Family Storage in Cassandra**
+[SQL]
+CREATE TABLE Users (
+    userID UUID PRIMARY KEY,
+    name TEXT,
+    email TEXT
+);
+
+INSERT INTO Users (userID, name, email) VALUES (uuid(), 'Bob', 'bob@example.com');
+
+---
+
+### 4️⃣ **Graph Databases**
+- 🔹 **Data Structure:** Nodes (entities) and Edges (relationships).
+- 🔹 **Best for:** Social networks, fraud detection, recommendation engines.
+- 🔹 **Examples:** Neo4j, Amazon Neptune, Azure Cosmos DB (Graph API).
+
+#### ✅ **Example Graph Query in Neo4j**
+[SQL]
+CREATE (Alice:Person {name:"Alice"})  
+CREATE (Bob:Person {name:"Bob"})  
+CREATE (Alice)-[:FRIENDS_WITH]->(Bob)
+
+---
+
+## 🔹 Azure Non-Relational Database Options
+Microsoft Azure provides multiple **NoSQL database solutions** for different workloads.
+
+| Azure Service | Database Type | Best For |
+|--------------|--------------|----------|
+| **Azure Cosmos DB** | Multi-model (Key-Value, Document, Column-Family, Graph) | Global-scale apps, IoT, analytics |
+| **Azure Table Storage** | Key-Value Store | NoSQL storage for structured data |
+| **Azure Blob Storage** | Unstructured Data | Storing images, videos, logs, backups |
+| **Azure Data Lake Storage** | Big Data File Storage | Large-scale analytics, data lakes |
+| **Azure Cache for Redis** | Key-Value Store (In-memory) | Caching, real-time processing |
+
+---
+
+## 🔹 When to Use Non-Relational Databases?  
+Use **NoSQL** when:  
+✅ Data structure is **dynamic** or **schema-free** (e.g., JSON).  
+✅ High-speed **read/write** operations are required.  
+✅ **Horizontal scaling** (sharding) is needed for **large-scale applications**.  
+✅ Handling **big data**, **real-time analytics**, or **graph-based relationships**.  
+
+---
+
+## 🎯 **Summary: SQL vs NoSQL**  
+| Feature | SQL (Relational DB) | NoSQL (Non-Relational DB) |
+|---------|---------------------|---------------------------|
+| **Data Model** | Tables (Rows & Columns) | Key-Value, Document, Column-Family, Graph |
+| **Schema** | Fixed schema | Flexible schema |
+| **Scaling** | Vertical (scale-up) | Horizontal (scale-out) |
+| **Best For** | Structured data, transactions | Unstructured/Semi-structured data, Big Data |
+
+---
+
+## 📌 Conclusion  
+- **Non-Relational Databases (NoSQL)** are **highly scalable** and ideal for handling **big data** and **dynamic applications**.  
+- **Azure Cosmos DB** is a **fully managed NoSQL service** that supports **multi-model** (document, key-value, graph, and column-family).  
+- **Azure Table Storage & Redis** are great for **fast key-value lookups**.  
+- **Blob Storage & Data Lake** are used for **unstructured data**.  
+
+---
+
 
