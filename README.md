@@ -690,9 +690,10 @@ NoSQL databases are categorized into **four main types**, each designed for spec
 - 🔹 **Examples:** Redis, Amazon DynamoDB, Riak.
 
 #### ✅ **Example Key-Value Storage in Redis**
-[SQL]
+```sql
 SET user:1 "John Doe"
 GET user:1
+```
 
 ---
 
@@ -702,13 +703,14 @@ GET user:1
 - 🔹 **Examples:** MongoDB, CouchDB, Firebase Firestore.
 
 #### ✅ **Example Document Storage in MongoDB**
-[SQL]
+```sql
 db.users.insertOne({
     "_id": 1,
     "name": "Alice",
     "email": "alice@example.com",
     "orders": [1001, 1002, 1003]
 })
+```
 
 ---
 
@@ -718,12 +720,13 @@ db.users.insertOne({
 - 🔹 **Examples:** Apache Cassandra, Google Bigtable, HBase.
 
 #### ✅ **Example Column-Family Storage in Cassandra**
-[SQL]
+```sql
 CREATE TABLE Users (
     userID UUID PRIMARY KEY,
     name TEXT,
     email TEXT
 );
+```
 
 INSERT INTO Users (userID, name, email) VALUES (uuid(), 'Bob', 'bob@example.com');
 
@@ -735,11 +738,11 @@ INSERT INTO Users (userID, name, email) VALUES (uuid(), 'Bob', 'bob@example.com'
 - 🔹 **Examples:** Neo4j, Amazon Neptune, Azure Cosmos DB (Graph API).
 
 #### ✅ **Example Graph Query in Neo4j**
-[SQL]
+```sql
 CREATE (Alice:Person {name:"Alice"})  
 CREATE (Bob:Person {name:"Bob"})  
 CREATE (Alice)-[:FRIENDS_WITH]->(Bob)
-
+```
 ---
 
 ## 🔹 Azure Non-Relational Database Options
