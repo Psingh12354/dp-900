@@ -126,9 +126,23 @@ A data warehouse is a centralized repository for structured and semi-structured 
 
 ---
 
+## 📌 What is a Relational Database?
+A **Relational Database (RDBMS)** is a structured collection of data organized into tables with predefined relationships. It follows **ACID** (Atomicity, Consistency, Isolation, Durability) properties to ensure data reliability.
+
+
 
 ## 📌 Table
 A **Table** is a structured collection of related data stored in a database. It consists of rows (records) and columns (fields), where each column has a specific data type.
+
+- A table consists of **rows (records)** and **columns (attributes)**.
+- Each row represents a unique entry, and each column holds specific data types.
+
+#### **Example:** Customer Table
+| CustomerID | Name     | Email           | Age |
+|------------|---------|----------------|-----|
+| 101        | Alice   | alice@email.com | 30  |
+| 102        | Bob     | bob@email.com   | 25  |
+
 
 ### 🛠 Query:
 ```sql
@@ -138,7 +152,16 @@ CREATE TABLE Employees (
     Age INT,  
     Department VARCHAR(50)  
 );
-```
+``
+
+##  Azure Tools for Relational Databases
+
+| **Azure Tool** | **Description** |
+|--------------|----------------|
+| **Azure SQL Database** | Managed relational database with scalability |
+| **Azure Database for PostgreSQL** | Fully managed PostgreSQL database |
+| **Azure Database for MySQL** | Fully managed MySQL database |
+| **Azure Synapse Analytics** | Supports relational data for analytics |`
 
 ---
 
@@ -263,3 +286,93 @@ An **Index** improves the speed of queries by allowing faster data retrieval.
 ```sql
 CREATE INDEX idx_employee_name ON Employees (Name);
 ```
+
+---
+
+## 📌 Managing relational databases
+Managing relational databases involves tasks like provisioning, security, backup, monitoring, and optimization to ensure smooth database operations in Azure.
+
+---
+
+## 1. Database Provisioning
+Provisioning involves setting up a new database with necessary configurations.
+
+### **Azure Tools for Database Provisioning**
+- **Azure SQL Database** – Fully managed relational database.
+- **Azure Database for PostgreSQL** – Open-source PostgreSQL as a managed service.
+- **Azure Database for MySQL** – Managed MySQL database service.
+
+### **Example: Provisioning an Azure SQL Database**
+- Navigate to **Azure Portal** → **Create a resource** → **Azure SQL Database**.
+- Choose the **server name, pricing tier**, and **compute resources**.
+- Configure **backup and redundancy** options.
+
+---
+
+## 2. Security & Access Management
+Ensuring data security through authentication, authorization, and encryption.
+
+### **Key Security Features**
+- **Azure Active Directory (AAD)** – Centralized authentication.
+- **Firewall Rules** – Restricts database access based on IP.
+- **Transparent Data Encryption (TDE)** – Encrypts database files.
+- **Always Encrypted** – Protects sensitive data at the column level.
+
+### **Example: Setting Up Firewall Rules**
+```sql
+EXEC sp_set_firewall_rule @name = 'AllowClientIP', @start_ip_address = '192.168.1.1', @end_ip_address = '192.168.1.1';
+```
+
+---
+
+## 3. Backup & Restore
+Ensuring business continuity through automated backups and point-in-time restores.
+
+### **Backup Options in Azure**
+- **Automated Backups** – Full, differential, and transaction log backups.
+- **Geo-Redundant Backups** – Stored in multiple Azure regions.
+- **Point-in-Time Restore** – Recover database to a specific point.
+
+### **Example: Restoring an Azure SQL Database**
+- Navigate to **Azure Portal** → **Azure SQL Database** → **Backups** → **Restore**.
+
+---
+
+## 4. Performance Monitoring & Optimization
+Improving database performance using built-in tools.
+
+### **Azure Performance Tools**
+- **Azure SQL Query Performance Insights** – Analyzes slow queries.
+- **Automatic Tuning** – Suggests and applies performance improvements.
+- **Indexing & Partitioning** – Optimizes query execution.
+
+### **Example: Enabling Automatic Tuning**
+```sql
+ALTER DATABASE myDB SET AUTOMATIC_TUNING = AUTO;
+```
+
+---
+
+## 5. High Availability & Disaster Recovery
+Ensuring databases are highly available and resilient against failures.
+
+### **Azure Solutions for High Availability**
+- **Geo-Replication** – Replicates database to another region.
+- **Failover Groups** – Automated failover between databases.
+- **Zone-Redundant Databases** – Distributed across multiple availability zones.
+
+### **Example: Enabling Geo-Replication**
+- Navigate to **Azure SQL Database** → **Geo-Replication** → **Enable**.
+
+---
+
+## 🔥 Summary Table
+| Feature | Description | Azure Tools |
+|---------|-------------|-------------|
+| **Provisioning** | Setting up a new database | Azure SQL Database, PostgreSQL, MySQL |
+| **Security** | Access control & encryption | AAD, Firewall, TDE, Always Encrypted |
+| **Backup & Restore** | Automated & manual recovery options | Azure Backup, Geo-Replication |
+| **Performance Optimization** | Query tuning & indexing | Query Insights, Automatic Tuning |
+| **High Availability** | Ensuring uptime & resilience | Failover Groups, Zone Redundancy |
+
+---
