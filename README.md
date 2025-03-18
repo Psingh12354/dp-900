@@ -785,4 +785,129 @@ Use **NoSQL** when:
 
 ---
 
+## 📌 What is Cosmos DB?  
+Azure Cosmos DB is a **fully managed, globally distributed NoSQL database** with **low latency** and **high availability**.
+
+### 🔹 **Key Features**  
+✅ Multi-Model (SQL, MongoDB, Cassandra, Gremlin, Table)  
+✅ Global Distribution (Multi-region replication)  
+✅ Auto-Scaling (Serverless & Provisioned Throughput)  
+✅ Low Latency (<10ms Reads, <15ms Writes)  
+
+---
+
+## 📌 Core Concepts  
+
+| Component | Description |
+|-----------|------------|
+| **Database** | Logical container for collections |
+| **Containers** | Stores JSON documents, key-value pairs |
+| **Items** | Individual records (documents, rows) |
+| **Partitions** | Distributes data for scalability |
+| **Indexing** | Enables fast queries |
+
+---
+
+## 📌 Cosmos DB APIs  
+
+| API | Use Case |
+|-----|---------|
+| **SQL API** | Query JSON with SQL-like syntax |
+| **MongoDB API** | Supports MongoDB workloads |
+| **Gremlin API** | Graph database queries |
+| **Cassandra API** | For Cassandra-based apps |
+| **Table API** | Key-value store |
+
+---
+
+## 📌 Basic SQL Queries  
+
+```sql 
+SELECT * FROM Customers WHERE city = 'New York'  
+```
+```sql
+INSERT INTO Customers (id, name) VALUES ('1', 'Alice')  
+```
+```sql  
+DELETE FROM Customers WHERE id = '1'  
+```
+---
+
+## 📌 Cosmos DB vs Azure SQL  
+
+| Feature | Cosmos DB | Azure SQL |
+|---------|----------|-----------|
+| **Data Model** | NoSQL | Relational (SQL) |
+| **Schema** | Schema-less | Fixed Schema |
+| **Scalability** | Global, auto-scale | Vertical scaling |
+| **Use Case** | IoT, Web apps, Big Data | OLTP, Business Apps |
+
+---
+
+## 📌 1. Azure Synapse Analytics (SQL Data Warehouse)  
+**Azure Synapse Analytics** is a **fully managed analytics service** that combines **SQL Data Warehouse + Big Data Processing**.
+
+✅ **Key Features**:  
+- **SQL & Spark Support** (Queries structured & unstructured data)  
+- **Massive Parallel Processing (MPP)** for fast analytics  
+- **Deep Integration** with Power BI & Machine Learning  
+- **Works with Azure Data Lake for big data storage**  
+
+📖 **Docs**: [Azure Synapse](https://learn.microsoft.com/en-us/azure/synapse-analytics/)  
+
+---
+
+## 📌 2. Modern Data Warehouse (MDW)  
+**Modern Data Warehouse** enables **real-time, cloud-native analytics**.
+
+🔹 **Key Components**:  
+- **Azure Data Lake Storage** → Stores raw data  
+- **Azure Data Factory** → Moves and transforms data  
+- **Azure Synapse Analytics** → Analyzes structured data  
+- **Azure Databricks** → Processes big data  
+- **Power BI** → Visualizes reports & dashboards  
+
+📖 **Docs**: [Modern Data Warehouse](https://learn.microsoft.com/en-us/azure/architecture/example-scenario/data/moderndatawarehouse)  
+
+---
+
+## 📌 3. Microsoft Fabric  
+**Microsoft Fabric** is an **all-in-one data platform** for **storage, analytics, AI, and BI**.
+
+✅ **Key Features**:  
+- **Unified Lakehouse Architecture**  
+- **Integrated Data Factory, Synapse, and Power BI**  
+- **Supports real-time & batch processing**  
+- **Optimized for AI & Machine Learning**  
+
+📖 **Docs**: [Microsoft Fabric](https://learn.microsoft.com/en-us/fabric/)  
+
+---
+
+## 📌 4. Data Ingestion & Processing (Azure Data Factory)  
+**Azure Data Factory (ADF)** is a **cloud ETL tool** that **moves, transforms, and processes data**.
+
+🔹 **Key Features**:  
+- **Supports 90+ data sources** (SQL, Blob, Cosmos DB, APIs)  
+- **Data Pipelines for batch & real-time processing**  
+- **Low-code, drag-and-drop interface**  
+- **Integrates with Synapse, Power BI, and ML services**  
+
+📖 **Docs**: [Azure Data Factory](https://learn.microsoft.com/en-us/azure/data-factory/)  
+
+---
+
+## 📌 5. Data Visualization (Power BI)  
+**Power BI** is a **business intelligence tool** for creating **interactive reports & dashboards**.
+
+✅ **Key Features**:  
+- **Connects to 100+ data sources (SQL, Excel, Azure, APIs)**  
+- **Drag-and-drop report building**  
+- **Real-time analytics with live data**  
+- **AI-powered insights**  
+
+📖 **Docs**: [Power BI](https://learn.microsoft.com/en-us/power-bi/)  
+
+---
+
 
