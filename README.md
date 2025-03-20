@@ -911,3 +911,210 @@ DELETE FROM Customers WHERE id = '1'
 ---
 
 
+
+
+
+## 1. Types of Data Analytics  
+
+Data analytics is categorized into different types based on how data is processed and insights are derived.  
+
+### **1.1 Descriptive Analytics**  
+- **Definition**: Summarizes past data to understand what has happened.  
+- **Example**: A sales report showing total revenue for the last quarter.  
+- **How to Identify**:  
+  - Focuses on historical data and trends  
+  - Uses dashboards, charts, and reports  
+  - Answers "What happened?"  
+- **Use Cases**:  
+  - Business intelligence dashboards  
+  - Monthly sales reports  
+  - Website traffic analysis  
+
+### **1.2 Diagnostic Analytics**  
+- **Definition**: Explains why something happened by identifying patterns and correlations.  
+- **Example**: Analyzing why sales dropped in a particular region by comparing factors like customer demographics and marketing campaigns.  
+- **How to Identify**:  
+  - Investigates causes and relationships in data  
+  - Uses drill-down analysis, data mining, and correlation analysis  
+  - Answers "Why did it happen?"  
+- **Use Cases**:  
+  - Root cause analysis  
+  - Customer churn analysis  
+  - Machine failure analysis  
+
+### **1.3 Predictive Analytics**  
+- **Definition**: Uses historical data and machine learning to predict future trends.  
+- **Example**: Predicting next month’s sales based on past trends and market conditions.  
+- **How to Identify**:  
+  - Uses statistical models, machine learning, and forecasting techniques  
+  - Identifies patterns and probabilities  
+  - Answers "What will happen?"  
+- **Use Cases**:  
+  - Forecasting stock prices  
+  - Customer demand prediction  
+  - Fraud detection  
+
+### **1.4 Prescriptive Analytics**  
+- **Definition**: Recommends actions to optimize outcomes based on predictive analytics.  
+- **Example**: Suggesting the best pricing strategy for a product to maximize revenue.  
+- **How to Identify**:  
+  - Uses optimization algorithms and simulations  
+  - Provides actionable recommendations  
+  - Answers "What should be done?"  
+- **Use Cases**:  
+  - Dynamic pricing models  
+  - Supply chain optimization  
+  - Personalized healthcare treatment recommendations  
+
+### **1.5 Cognitive Analytics**  
+- **Definition**: Uses AI, machine learning, and natural language processing (NLP) to mimic human intelligence and reasoning.  
+- **Example**: A chatbot that understands customer queries and provides intelligent responses.  
+- **How to Identify**:  
+  - Uses AI-driven techniques like NLP and deep learning  
+  - Can process unstructured data like text, images, and voice  
+  - Answers "How can AI enhance decisions?"  
+- **Use Cases**:  
+  - Virtual assistants (e.g., Alexa, Siri)  
+  - AI-powered customer support  
+  - Sentiment analysis  
+
+## 📌 Summary Table  
+
+| Analytics Type  | Purpose | Example | How to Identify | Use Cases |
+|----------------|---------|---------|----------------|-----------|
+| **Descriptive** | What happened? | Sales reports | Uses past data, reports, and dashboards | Dashboards, traffic analysis |
+| **Diagnostic** | Why did it happen? | Root cause analysis | Uses drill-down and correlation analysis | Churn analysis, failure analysis |
+| **Predictive** | What will happen? | Sales forecasting | Uses ML, statistical models, and forecasting | Stock predictions, fraud detection |
+| **Prescriptive** | What should be done? | Decision recommendations | Uses optimization and simulations | Pricing models, supply chain optimization |
+| **Cognitive** | How can AI enhance decisions? | AI-powered chatbots | Uses AI, NLP, and deep learning | Virtual assistants, sentiment analysis |
+
+‐----
+
+# Choosing the Right Azure Database Service  
+
+When selecting an Azure database service, consider factors such as data type, scalability, structure, and query needs.  
+
+## 📌 Quick Decision Guide  
+
+| Scenario | Recommended Azure DB | Reason |
+|----------|----------------------|--------|
+| **Need a traditional relational database for transactions (OLTP)?** | **Azure SQL Database** | Fully managed relational DB with high availability, backup, and scaling. |
+| **Migrating an on-prem SQL Server to the cloud?** | **Azure SQL Managed Instance** | Provides near 100% SQL Server compatibility with built-in maintenance. |
+| **Requires NoSQL with key-value storage?** | **Azure Cosmos DB (Table API)** | Best for fast, scalable key-value storage. |
+| **Need a NoSQL document-based DB for JSON data?** | **Azure Cosmos DB (Core API)** | Handles JSON documents with flexible schema and global distribution. |
+| **Need a columnar database for big data analytics?** | **Azure Synapse Analytics** | Optimized for massive parallel processing (MPP) and large-scale analytics. |
+| **Requires high-speed caching for applications?** | **Azure Cache for Redis** | Provides low-latency data caching for better app performance. |
+| **Storing time-series data from IoT devices?** | **Azure Data Explorer** | Designed for real-time analytics on large-scale time-series data. |
+| **Requires full-text search capabilities?** | **Azure Cognitive Search** | Optimized for intelligent search features, indexing, and NLP. |
+| **Need a graph database to analyze relationships?** | **Azure Cosmos DB (Gremlin API)** | Best for social networks, recommendation engines, and fraud detection. |
+| **Want to use an open-source relational database?** | **Azure Database for PostgreSQL / MySQL / MariaDB** | Fully managed open-source databases with scalability and high availability. |
+
+## 🎯 How to Identify the Right DB?  
+
+1. **Structured vs. Unstructured Data:**  
+   - **Structured (Tables, SQL Queries)** → Use **Azure SQL Database** or **Azure Synapse Analytics**.  
+   - **Unstructured (JSON, Key-Value, Graph)** → Use **Azure Cosmos DB**.  
+
+2. **Transactional vs. Analytical Workloads:**  
+   - **Transactional (OLTP - High-speed reads/writes, ACID compliance)** → Use **Azure SQL Database, PostgreSQL, MySQL**.  
+   - **Analytical (OLAP - Complex queries, data aggregation, reporting)** → Use **Azure Synapse Analytics, Data Explorer**.  
+
+3. **Scale and Performance Needs:**  
+   - **High throughput and low latency?** → Use **Cosmos DB, Redis Cache**.  
+   - **Massive-scale data processing?** → Use **Azure Synapse Analytics**.  
+
+4. **Application-Specific Needs:**  
+   - **IoT data?** → Use **Azure Data Explorer**.  
+   - **Graph-based relationships?** → Use **Cosmos DB (Gremlin API)**.  
+   - **Search-based applications?** → Use **Azure Cognitive Search**.  
+
+-----
+
+# Power BI: How to Identify and Answer Questions  
+
+Power BI is a business intelligence tool for data visualization, analytics, and reporting. In the DP-900 exam, questions related to Power BI can be categorized into different topics. This guide will help you **identify the type of question and what to look for in the answer.**  
+
+---
+
+## 🔍 1. **Power BI Components**  
+
+| **Question Type** | **What to Identify?** | **Keywords to Look For** |
+|------------------|---------------------|----------------------|
+| **What are the main components of Power BI?** | Identify the 3 key components: **Power BI Desktop, Power BI Service, Power BI Mobile**. | "Create reports", "Cloud-based sharing", "Mobile access" |
+| **Where are reports created in Power BI?** | Reports are created in **Power BI Desktop** and published to **Power BI Service**. | "Build and design reports" → **Power BI Desktop** |
+| **Where do you share and collaborate on reports?** | Reports are shared using **Power BI Service (cloud)**. | "Publishing", "Collaboration", "Cloud" |
+| **Which Power BI component is used for on-the-go access?** | Power BI Mobile is used for accessing reports on mobile devices. | "Access from phone", "Mobile App" |
+
+---
+
+## 🔍 2. **Power BI Data Sources**  
+
+| **Question Type** | **What to Identify?** | **Keywords to Look For** |
+|------------------|---------------------|----------------------|
+| **Which data sources does Power BI support?** | Power BI supports **Excel, SQL, Azure, APIs, JSON, and more**. | "Connect to SQL Server", "Azure Data Sources", "CSV or Excel files" |
+| **What is DirectQuery vs. Import mode?** | - **Import Mode**: Loads data into Power BI for faster performance.  
+- **DirectQuery**: Connects live to the data source without importing. | "Live connection", "Real-time", "Performance vs. Latest data" |
+| **When to use DirectQuery over Import mode?** | Use **DirectQuery** when data is **large, frequently updated, and requires real-time access**. | "Up-to-date data", "Large dataset", "Data changes frequently" |
+
+---
+
+## 🔍 3. **Power BI Data Transformation & Modeling**  
+
+| **Question Type** | **What to Identify?** | **Keywords to Look For** |
+|------------------|---------------------|----------------------|
+| **Which tool is used for data transformation in Power BI?** | **Power Query** (used to clean, reshape, and transform data). | "Transform data", "ETL process", "Modify before loading" |
+| **What is DAX in Power BI?** | **Data Analysis Expressions (DAX)** is a formula language for calculations in Power BI. | "Custom calculations", "Measures and Columns", "Aggregations" |
+| **When to use Measures vs. Calculated Columns?** | - **Measures**: Calculations based on filters (dynamic).  
+- **Calculated Columns**: Computed at row level (static). | "Dynamic calculation" → **Measures**  
+"Stored in table" → **Calculated Columns** |
+
+---
+
+## 🔍 4. **Power BI Visualization & Reports**  
+
+| **Question Type** | **What to Identify?** | **Keywords to Look For** |
+|------------------|---------------------|----------------------|
+| **Which visualization to use for trends over time?** | **Line Chart** is best for trends. | "Time-series analysis", "Trends over months/years" |
+| **What is the best visualization for comparisons?** | **Bar/Column Chart** is best for comparisons. | "Compare values across categories" |
+| **When to use a Pie Chart?** | Use **Pie Chart** for part-to-whole comparisons (not many categories). | "Percentage distribution", "Proportions of a whole" |
+| **How to enable interactivity between visuals?** | Use **Filters, Slicers, and Drillthrough** for dynamic interactions. | "Drill down", "Cross-filtering", "Dynamic changes" |
+
+---
+
+## 🔍 5. **Power BI Deployment & Sharing**  
+
+| **Question Type** | **What to Identify?** | **Keywords to Look For** |
+|------------------|---------------------|----------------------|
+| **How to publish a report in Power BI?** | Reports are published to **Power BI Service**. | "Publish from Desktop", "Upload to Cloud" |
+| **Who can access shared reports?** | Only users within the same organization (unless external sharing is enabled). | "Permissions", "User access control", "Workspace members" |
+| **What are Power BI Workspaces?** | **Workspaces** allow teams to collaborate on reports before publishing. | "Collaborate with team", "Multiple users working on reports" |
+| **How to schedule automatic data refresh?** | Use **Power BI Gateway** for scheduled refresh from on-prem data sources. | "Automatic refresh", "On-premises data", "Keep reports updated" |
+
+---
+
+## 🔍 6. **Power BI Security & Licensing**  
+
+| **Question Type** | **What to Identify?** | **Keywords to Look For** |
+|------------------|---------------------|----------------------|
+| **What are Row-Level Security (RLS) rules?** | RLS restricts access to specific data rows based on user roles. | "User-based data filtering", "Restricted access per role" |
+| **Which Power BI licenses are available?** | - **Power BI Free**: Personal use only.  
+- **Power BI Pro**: Sharing & collaboration.  
+- **Power BI Premium**: Enterprise-scale & advanced AI. | "Sharing with others" → **Pro**  
+"Large-scale enterprise needs" → **Premium** |
+
+---
+
+## 🏆 **Quick Power BI Decision Guide**  
+
+| **If the question asks about...** | **Look for...** |
+|----------------------------------|----------------|
+| **Data transformation?** | **Power Query** |
+| **Calculations and formulas?** | **DAX (Measures, Calculated Columns)** |
+| **Real-time vs. historical data?** | **DirectQuery (real-time), Import Mode (historical)** |
+| **Comparing values across categories?** | **Bar/Column Chart** |
+| **Filtering data for specific users?** | **Row-Level Security (RLS)** |
+| **Sharing reports?** | **Power BI Service & Workspaces** |
+| **Scheduling automatic refresh?** | **Power BI Gateway** |
+
+---
+
