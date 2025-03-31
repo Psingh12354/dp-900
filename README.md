@@ -152,7 +152,7 @@ CREATE TABLE Employees (
     Age INT,  
     Department VARCHAR(50)  
 );
-``
+```
 
 ##  Azure Tools for Relational Databases
 
